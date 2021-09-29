@@ -67,6 +67,9 @@
     },
     "phone": {
       "type": "string"
+    },
+    "notificationToken": {
+      "type": "string"
     }
   }
 }
