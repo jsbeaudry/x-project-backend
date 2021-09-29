@@ -3,16 +3,16 @@
 const { sanitizeEntity } = require("strapi-utils");
 const web3 = require("@solana/web3.js");
 const splToken = require("@solana/spl-token");
-const bip39 = require("bip39");
-const nacl = require("tweetnacl");
+// const bip39 = require("bip39");
+// const nacl = require("tweetnacl");
 
-const Cryptr = require("cryptr");
-const cryptr = new Cryptr(process.env.SECRETKEY);
+// const Cryptr = require("cryptr");
+// const cryptr = new Cryptr(process.env.SECRETKEY);
 
-const connection = new web3.Connection(
-  web3.clusterApiUrl("testnet"),
-  "confirmed"
-);
+// const connection = new web3.Connection(
+//   web3.clusterApiUrl("testnet"),
+//   "confirmed"
+// );
 
 // const regenerateSeedPhrase = () => {
 //   const phrase = bip39.generateMnemonic();
