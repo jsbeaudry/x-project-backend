@@ -14,158 +14,158 @@ const connection = new web3.Connection(
   "confirmed"
 );
 
-const regenerateSeedPhrase = () => {
-  const phrase = bip39.generateMnemonic();
-  return phrase;
-};
-const createAccountFromMnemonic = async (mnemonic) => {
-  const seed = await bip39.mnemonicToSeed(mnemonic);
-  const keyPair = nacl.sign.keyPair.fromSeed(seed.slice(0, 32));
-  const wallet = new web3.Account(keyPair.secretKey);
+// const regenerateSeedPhrase = () => {
+//   const phrase = bip39.generateMnemonic();
+//   return phrase;
+// };
+// const createAccountFromMnemonic = async (mnemonic) => {
+//   const seed = await bip39.mnemonicToSeed(mnemonic);
+//   const keyPair = nacl.sign.keyPair.fromSeed(seed.slice(0, 32));
+//   const wallet = new web3.Account(keyPair.secretKey);
 
-  const account = {
-    keyPair,
-    wallet,
-  };
-  return await account;
-};
-const validateRecoverPhrase = (phrase) => {
-  if (phrase) {
-    if (bip39.validateMnemonic(phrase)) {
-      return "success";
-    } else {
-      return "error";
-    }
-  }
-  return null;
-};
+//   const account = {
+//     keyPair,
+//     wallet,
+//   };
+//   return await account;
+// };
+// const validateRecoverPhrase = (phrase) => {
+//   if (phrase) {
+//     if (bip39.validateMnemonic(phrase)) {
+//       return "success";
+//     } else {
+//       return "error";
+//     }
+//   }
+//   return null;
+// };
 
-const sendSlpToken = async (phrase, walletTo, tokenId, amount, digit) => {
-  const uncrypt = cryptr.decrypt(phrase);
-  const seed = await bip39.mnemonicToSeed(uncrypt);
+// const sendSlpToken = async (phrase, walletTo, tokenId, amount, digit) => {
+//   const uncrypt = cryptr.decrypt(phrase);
+//   const seed = await bip39.mnemonicToSeed(uncrypt);
 
-  const keyPair = nacl.sign.keyPair.fromSeed(seed.slice(0, 32));
-  // console.log(keyPair.secretKey);
-  const fromWallet = new web3.Account(keyPair.secretKey);
-  const keyTokenId = new web3.PublicKey(tokenId);
-  const receiver = new web3.PublicKey(walletTo);
+//   const keyPair = nacl.sign.keyPair.fromSeed(seed.slice(0, 32));
+//   // console.log(keyPair.secretKey);
+//   const fromWallet = new web3.Account(keyPair.secretKey);
+//   const keyTokenId = new web3.PublicKey(tokenId);
+//   const receiver = new web3.PublicKey(walletTo);
 
-  try {
-    // Load new token mint
-    const token = new splToken.Token(
-      connection,
-      keyTokenId,
-      splToken.TOKEN_PROGRAM_ID,
-      fromWallet
-    );
+//   try {
+//     // Load new token mint
+//     const token = new splToken.Token(
+//       connection,
+//       keyTokenId,
+//       splToken.TOKEN_PROGRAM_ID,
+//       fromWallet
+//     );
 
-    // Create associated token accounts for my token if they don't exist yet
-    var fromTokenAccount = await token.getOrCreateAssociatedAccountInfo(
-      fromWallet.publicKey
-    );
-    var receiverTokenAccount = await token.getOrCreateAssociatedAccountInfo(
-      receiver
-    );
+//     // Create associated token accounts for my token if they don't exist yet
+//     var fromTokenAccount = await token.getOrCreateAssociatedAccountInfo(
+//       fromWallet.publicKey
+//     );
+//     var receiverTokenAccount = await token.getOrCreateAssociatedAccountInfo(
+//       receiver
+//     );
 
-    console.log("publicKey", token.publicKey.toString());
-    console.log("programId", token.programId.toString());
-    console.log("associatedProgramId", token.associatedProgramId.toString());
-    console.log("payer", token.payer.publicKey.toString());
+//     console.log("publicKey", token.publicKey.toString());
+//     console.log("programId", token.programId.toString());
+//     console.log("associatedProgramId", token.associatedProgramId.toString());
+//     console.log("payer", token.payer.publicKey.toString());
 
-    // Add token transfer instructions to transaction
-    var transaction = new web3.Transaction({
-      // feePayer: receiverTokenAccount.address,
-    }).add(
-      splToken.Token.createTransferInstruction(
-        splToken.TOKEN_PROGRAM_ID,
-        fromTokenAccount.address,
-        receiverTokenAccount.address,
-        fromWallet.publicKey,
-        [],
-        amount * 1000000
-      )
-    );
-    console.log(transaction);
-    // Sign transaction, broadcast, and confirm
-    var signature = await web3.sendAndConfirmTransaction(
-      connection,
-      transaction,
-      [fromWallet]
-    );
+//     // Add token transfer instructions to transaction
+//     var transaction = new web3.Transaction({
+//       // feePayer: receiverTokenAccount.address,
+//     }).add(
+//       splToken.Token.createTransferInstruction(
+//         splToken.TOKEN_PROGRAM_ID,
+//         fromTokenAccount.address,
+//         receiverTokenAccount.address,
+//         fromWallet.publicKey,
+//         [],
+//         amount * 1000000
+//       )
+//     );
+//     console.log(transaction);
+//     // Sign transaction, broadcast, and confirm
+//     var signature = await web3.sendAndConfirmTransaction(
+//       connection,
+//       transaction,
+//       [fromWallet]
+//     );
 
-    return { succes: true, signature: signature };
-  } catch (err) {
-    return { succes: false, err: err };
-  }
-};
-const mintSlpToken = async (phrase, walletTo, tokenId, amount) => {
-  const seed = await bip39.mnemonicToSeed(phrase);
+//     return { succes: true, signature: signature };
+//   } catch (err) {
+//     return { succes: false, err: err };
+//   }
+// };
+// const mintSlpToken = async (phrase, walletTo, tokenId, amount) => {
+//   const seed = await bip39.mnemonicToSeed(phrase);
 
-  const keyPair = nacl.sign.keyPair.fromSeed(seed.slice(0, 32));
-  const fromWallet = new web3.Account(keyPair.secretKey);
-  const keyTokenId = new web3.PublicKey(tokenId);
-  const receiver = new web3.PublicKey(walletTo);
+//   const keyPair = nacl.sign.keyPair.fromSeed(seed.slice(0, 32));
+//   const fromWallet = new web3.Account(keyPair.secretKey);
+//   const keyTokenId = new web3.PublicKey(tokenId);
+//   const receiver = new web3.PublicKey(walletTo);
 
-  try {
-    // Load new token mint
-    const token = new splToken.Token(
-      connection,
-      keyTokenId,
-      splToken.TOKEN_PROGRAM_ID,
-      fromWallet
-    );
+//   try {
+//     // Load new token mint
+//     const token = new splToken.Token(
+//       connection,
+//       keyTokenId,
+//       splToken.TOKEN_PROGRAM_ID,
+//       fromWallet
+//     );
 
-    // Create associated token accounts for my token if they don't exist yet
-    var fromTokenAccount = await token.getOrCreateAssociatedAccountInfo(
-      fromWallet.publicKey
-    );
-    var receiverTokenAccount = await token.getOrCreateAssociatedAccountInfo(
-      receiver
-    );
+//     // Create associated token accounts for my token if they don't exist yet
+//     var fromTokenAccount = await token.getOrCreateAssociatedAccountInfo(
+//       fromWallet.publicKey
+//     );
+//     var receiverTokenAccount = await token.getOrCreateAssociatedAccountInfo(
+//       receiver
+//     );
 
-    // Minting 1 new token to the "fromTokenAccount" account we just returned/created
-    let res = await token.mintTo(
-      receiverTokenAccount.address,
-      fromWallet.publicKey,
-      [],
-      amount * 1000000000
-    );
+//     // Minting 1 new token to the "fromTokenAccount" account we just returned/created
+//     let res = await token.mintTo(
+//       receiverTokenAccount.address,
+//       fromWallet.publicKey,
+//       [],
+//       amount * 1000000000
+//     );
 
-    console.log(res);
-    return { succes: true };
-  } catch (err) {
-    return { succes: false, err: err };
-  }
-};
-const sendSolToken = async (mnemonic, receiver, amount) => {
-  const seed = await bip39.mnemonicToSeed(mnemonic);
-  const keyPair = nacl.sign.keyPair.fromSeed(seed.slice(0, 32));
-  const wallet = new web3.Account(keyPair.secretKey);
+//     console.log(res);
+//     return { succes: true };
+//   } catch (err) {
+//     return { succes: false, err: err };
+//   }
+// };
+// const sendSolToken = async (mnemonic, receiver, amount) => {
+//   const seed = await bip39.mnemonicToSeed(mnemonic);
+//   const keyPair = nacl.sign.keyPair.fromSeed(seed.slice(0, 32));
+//   const wallet = new web3.Account(keyPair.secretKey);
 
-  const receiverKey = new web3.PublicKey(receiver);
-  try {
-    const transaction1 = web3.SystemProgram.transfer({
-      fromPubkey: wallet.publicKey,
-      toPubkey: receiverKey,
+//   const receiverKey = new web3.PublicKey(receiver);
+//   try {
+//     const transaction1 = web3.SystemProgram.transfer({
+//       fromPubkey: wallet.publicKey,
+//       toPubkey: receiverKey,
 
-      lamports: parseFloat(amount) * 1000000000,
-    });
+//       lamports: parseFloat(amount) * 1000000000,
+//     });
 
-    const transaction = new web3.Transaction().add(transaction1);
+//     const transaction = new web3.Transaction().add(transaction1);
 
-    let signature = await web3.sendAndConfirmTransaction(
-      connection,
-      transaction,
-      [wallet]
-    );
+//     let signature = await web3.sendAndConfirmTransaction(
+//       connection,
+//       transaction,
+//       [wallet]
+//     );
 
-    console.log("SIGNATURE", signature);
+//     console.log("SIGNATURE", signature);
 
-    return { succes: true, signature: signature };
-  } catch (err) {
-    return { succes: false, err: err };
-  }
-};
+//     return { succes: true, signature: signature };
+//   } catch (err) {
+//     return { succes: false, err: err };
+//   }
+// };
 
 // module.exports = {
 //   /**
