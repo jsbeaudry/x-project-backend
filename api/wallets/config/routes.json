@@ -1,6 +1,14 @@
 {
   "routes": [
     {
+      "method": "POST",
+      "path": "/wallets",
+      "handler": "wallets.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "GET",
       "path": "/wallets",
       "handler": "wallets.find",
@@ -18,67 +26,9 @@
     },
 
     {
-      "method": "POST",
-      "path": "/wallets/createtoken",
-      "handler": "wallets.createToken",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "POST",
-      "path": "/wallets/sendsoltoken",
-      "handler": "wallets.sendSolToken",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "POST",
-      "path": "/wallets/sendslptoken",
-      "handler": "wallets.sendSlpToken",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "POST",
-      "path": "/wallets/mintslptoken",
-      "handler": "wallets.mintSlpToken",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/wallets/requestairdrop/:publicKey/:amount",
-      "handler": "wallets.requestAirDrop",
-      "config": {
-        "policies": []
-      }
-    },
-
-    {
       "method": "GET",
       "path": "/wallets/:id",
       "handler": "wallets.findOne",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/wallets/balancewallet/:address",
-      "handler": "wallets.balanceWallet",
-      "config": {
-        "policies": []
-      }
-    },
-
-    {
-      "method": "POST",
-      "path": "/wallets",
-      "handler": "wallets.create",
       "config": {
         "policies": []
       }
