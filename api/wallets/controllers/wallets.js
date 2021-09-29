@@ -6,8 +6,8 @@ const splToken = require("@solana/spl-token");
 const bip39 = require("bip39");
 const nacl = require("tweetnacl");
 
-// const Cryptr = require("cryptr");
-// const cryptr = new Cryptr(process.env.SECRETKEY);
+const Cryptr = require("cryptr");
+const cryptr = new Cryptr(process.env.SECRETKEY);
 
 // const connection = new web3.Connection(
 //   web3.clusterApiUrl("testnet"),
