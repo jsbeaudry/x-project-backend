@@ -1,0 +1,23 @@
+{
+  "kind": "collectionType",
+  "collectionName": "wallets",
+  "info": {
+    "name": "wallets"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "publicKey": {
+      "type": "string"
+    },
+    "secretKey": {
+      "type": "text"
+    },
+    "mnemonic": {
+      "type": "text"
+    }
+  }
+}

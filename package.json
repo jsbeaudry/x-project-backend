@@ -11,15 +11,20 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "@solana/spl-token": "^0.1.8",
+    "@solana/web3.js": "^1.29.1",
+    "bip39": "^3.0.4",
+    "cryptr": "^6.0.2",
     "strapi": "3.4.3",
     "strapi-admin": "3.4.3",
-    "strapi-utils": "3.4.3",
-    "strapi-plugin-content-type-builder": "3.4.3",
+    "strapi-connector-mongoose": "3.4.3",
     "strapi-plugin-content-manager": "3.4.3",
-    "strapi-plugin-users-permissions": "3.4.3",
+    "strapi-plugin-content-type-builder": "3.4.3",
     "strapi-plugin-email": "3.4.3",
     "strapi-plugin-upload": "3.4.3",
-    "strapi-connector-mongoose": "3.4.3"
+    "strapi-plugin-users-permissions": "3.4.3",
+    "strapi-utils": "3.4.3",
+    "tweetnacl": "^1.0.3"
   },
   "author": {
     "name": "A Strapi developer"

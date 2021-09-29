@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "follows",
+  "info": {
+    "name": "follows"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "follower": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["PENDING", "ACCEPTED", "REJECTED"]
+    },
+    "followUID": {
+      "type": "string",
+      "unique": true,
+      "required": true
+    }
+  }
+}

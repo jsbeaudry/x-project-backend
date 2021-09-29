@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "transactions",
+  "info": {
+    "name": "transactions"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "sender": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "receiver": {
+      "plugin": "users-permissions",
+      "model": "user"
+    },
+    "amount": {
+      "type": "float"
+    },
+    "signature": {
+      "type": "string"
+    },
+    "currency": {
+      "type": "string"
+    }
+  }
+}
