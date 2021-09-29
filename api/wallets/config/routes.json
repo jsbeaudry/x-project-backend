@@ -48,6 +48,55 @@
       "config": {
         "policies": []
       }
+    },
+
+    {
+      "method": "POST",
+      "path": "/wallets/createtoken",
+      "handler": "wallets.createToken",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/wallets/balancewallet/:address",
+      "handler": "wallets.balanceWallet",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/wallets/sendsoltoken",
+      "handler": "wallets.sendSolToken",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/wallets/sendslptoken",
+      "handler": "wallets.sendSlpToken",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/wallets/mintslptoken",
+      "handler": "wallets.mintSlpToken",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/wallets/requestairdrop/:publicKey/:amount",
+      "handler": "wallets.requestAirDrop",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }
