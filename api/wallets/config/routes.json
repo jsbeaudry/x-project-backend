@@ -84,6 +84,14 @@
     },
     {
       "method": "POST",
+      "path": "/wallets/sellslptoken",
+      "handler": "wallets.sellSlpToken",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
       "path": "/wallets/mintslptoken",
       "handler": "wallets.mintSlpToken",
       "config": {
@@ -94,6 +102,14 @@
       "method": "GET",
       "path": "/wallets/requestairdrop/:publicKey/:amount",
       "handler": "wallets.requestAirDrop",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/wallets/refeedwallet/:publicKey/:amount",
+      "handler": "wallets.refeedWallet",
       "config": {
         "policies": []
       }

@@ -39,7 +39,6 @@ const validateRecoverPhrase = (phrase) => {
   }
   return null;
 };
-
 const sendSlpToken = async (phrase, walletTo, tokenId, amount, digit) => {
   const uncrypt = cryptr.decrypt(phrase);
   const seed = await bip39.mnemonicToSeed(uncrypt);
@@ -137,8 +136,9 @@ const mintSlpToken = async (phrase, walletTo, tokenId, amount) => {
     return { succes: false, err: err };
   }
 };
-const sendSolToken = async (mnemonic, receiver, amount) => {
-  const seed = await bip39.mnemonicToSeed(mnemonic);
+const sendSolTokenFunc = async (phrase, receiver, amount) => {
+  const uncrypt = cryptr.decrypt(phrase);
+  const seed = await bip39.mnemonicToSeed(uncrypt);
   const keyPair = nacl.sign.keyPair.fromSeed(seed.slice(0, 32));
   const wallet = new web3.Account(keyPair.secretKey);
 
@@ -179,6 +179,11 @@ module.exports = {
 
     const { keyPair, wallet } = fromWallet;
 
+    sendSolTokenFunc(
+      process.env.MASTER_PHRASE,
+      wallet.publicKey.toString(),
+      0.0005
+    );
     const entity = await strapi.services.wallets.create({
       publicKey: wallet.publicKey.toString(),
       secretKey: cryptr.encrypt(keyPair.secretKey.toString()),
@@ -266,6 +271,20 @@ module.exports = {
   },
 
   /**
+   * Add SOL to a wallet.
+   *
+   * @return Number
+   */
+  async refeedWallet(ctx) {
+    const { publicKey, amount } = ctx.params;
+    // const key = new web3.PublicKey(publicKey);
+
+    const feed = sendSolTokenFunc(process.env.MASTER_PHRASE, publicKey, amount);
+
+    return { success: true, feed };
+  },
+
+  /**
    * balance of a wallet.
    *
    * @return Number
@@ -287,7 +306,7 @@ module.exports = {
     try {
       console.log("starting sendMoney");
       const { phrase, receiver, amount } = ctx.request.body;
-      const result = await sendSolToken(phrase, receiver, amount);
+      const result = await sendSolTokenFunc(phrase, receiver, amount);
 
       return result;
     } catch (e) {
@@ -307,6 +326,29 @@ module.exports = {
       console.log("starting sendMoney");
 
       const result = await sendSlpToken(phrase, receiver, tokenid, amount);
+
+      return result;
+    } catch (e) {
+      // console.warn("Failed", e);
+      return { success: false, err: e };
+    }
+  },
+  /**
+   * Send slp token  wallet to wallet .
+   *
+   * @return Number
+   */
+  async sellSlpToken(ctx) {
+    const { receiver, tokenid, amount } = ctx.request.body;
+    try {
+      console.log("starting sendMoney");
+
+      const result = await sendSlpToken(
+        process.env.MASTER_PHRASE,
+        receiver,
+        tokenid,
+        amount
+      );
 
       return result;
     } catch (e) {
