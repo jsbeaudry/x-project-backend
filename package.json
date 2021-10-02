@@ -24,6 +24,7 @@
     "strapi-plugin-upload": "3.4.3",
     "strapi-plugin-users-permissions": "3.4.3",
     "strapi-utils": "3.4.3",
+    "stripe": "^8.178.0",
     "tweetnacl": "^1.0.3"
   },
   "author": {

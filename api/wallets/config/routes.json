@@ -99,6 +99,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/wallets/stripepayment",
+      "handler": "wallets.setPayment",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "GET",
       "path": "/wallets/requestairdrop/:publicKey/:amount",
       "handler": "wallets.requestAirDrop",

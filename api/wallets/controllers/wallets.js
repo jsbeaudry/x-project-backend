@@ -5,7 +5,8 @@ const web3 = require("@solana/web3.js");
 const splToken = require("@solana/spl-token");
 const bip39 = require("bip39");
 const nacl = require("tweetnacl");
-
+const Stripe = require("stripe");
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const Cryptr = require("cryptr");
 const cryptr = new Cryptr(process.env.SECRETKEY);
 
@@ -255,6 +256,39 @@ module.exports = {
     } catch (e) {
       // console.warn("Failed", e);
       return { success: false, err: e };
+    }
+  },
+
+  /**
+   * Stripe payment
+   *
+   * @return {Object}
+   */
+
+  async setPayment(ctx) {
+    try {
+      // Getting data from client
+      const { amount, name, currency } = ctx.request.body;
+
+      // Simple validation
+      if (!amount || !name) return { message: "All fields are required" };
+      // amount = parseInt(amount);
+      // Initiate payment
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: Math.round(amount * 100),
+        currency: currency,
+        payment_method_types: ["card"],
+        metadata: { name },
+      });
+      // Extracting the client secret
+      const clientSecret = paymentIntent.client_secret;
+      // Sending the client secret as response
+
+      return { message: "Payment initiated", clientSecret };
+    } catch (err) {
+      // Catch any error and send error 500 to client
+      console.error(err);
+      return { message: "Internal Server Error" };
     }
   },
   /**
