@@ -79,6 +79,9 @@
     },
     "level": {
       "type": "string"
+    },
+    "sex": {
+      "type": "string"
     }
   }
 }
