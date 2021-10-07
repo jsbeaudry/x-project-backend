@@ -121,6 +121,30 @@
       "config": {
         "policies": []
       }
+    },
+    {
+      "method": "GET",
+      "path": "/wallets/apricotdata/:publickey",
+      "handler": "wallets.getApricotData",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/wallets/apricot-lending",
+      "handler": "wallets.setApricotLending",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/wallets/apricot-withdraw",
+      "handler": "wallets.setApricotWithdraw",
+      "config": {
+        "policies": []
+      }
     }
   ]
 }

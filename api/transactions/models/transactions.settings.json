@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "transactions",
   "info": {
-    "name": "transactions"
+    "name": "transactions",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -26,6 +27,18 @@
     },
     "currency": {
       "type": "string"
+    },
+    "network": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "SEND",
+        "LEND",
+        "BORROW"
+      ],
+      "default": "SEND"
     }
   }
 }

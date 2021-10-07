@@ -10,9 +10,10 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const Cryptr = require("cryptr");
 const cryptr = new Cryptr(process.env.SECRETKEY);
 const apricot = require("@apricot-lend/apricot");
+const { re } = require("semver");
 
 const connection = new web3.Connection(
-  web3.clusterApiUrl("testnet"),
+  web3.clusterApiUrl("devnet"),
   "confirmed"
 );
 
@@ -34,21 +35,14 @@ const apricotLending = async () => {
   const conn = connection;
 
   // fake btc mint (on devnet only)
-  const fakeBtcMint = new web3.PublicKey(apricot.mints.fake_btc);
-  const fakeEthMint = new web3.PublicKey(apricot.mints.fake_eth);
+  const fakeUsdcMint = new web3.PublicKey(apricot.mints.fake_usdc);
+  // const fakeEthMint = new web3.PublicKey(apricot.mints.fake_eth);
 
   // get our associated token account for fakeBtcMint
   const testBtcSpl = await splToken.Token.getAssociatedTokenAddress(
     splToken.ASSOCIATED_TOKEN_PROGRAM_ID,
     splToken.TOKEN_PROGRAM_ID,
-    fakeBtcMint,
-    testAccount.publicKey
-  );
-
-  const testEthSpl = await splToken.Token.getAssociatedTokenAddress(
-    splToken.ASSOCIATED_TOKEN_PROGRAM_ID,
-    splToken.TOKEN_PROGRAM_ID,
-    fakeEthMint,
+    fakeUsdcMint,
     testAccount.publicKey
   );
 
@@ -57,16 +51,13 @@ const apricotLending = async () => {
 
   const isActive = await wrapper.isUserActive(testAccount.publicKey);
 
-  const rep = await wrapper.getParsedUserInfo(testAccount.publicKey);
-  console.log(rep.num_assets);
-
   if (isActive) {
     // if user already exists, make a direct deposit
     await wrapper.deposit(
       testAccount,
       testBtcSpl,
-      apricot.mints.fake_btc,
-      1000000000
+      apricot.mints.fake_usdc,
+      1000000000 * 20
     );
     console.log("Deposited");
   } else {
@@ -75,8 +66,8 @@ const apricotLending = async () => {
     let rep = await wrapper.add_user_and_deposit(
       testAccount,
       testBtcSpl,
-      apricot.mints.fake_btc,
-      1000000000
+      apricot.mints.fake_usdc,
+      100000000 * 20
     );
 
     console.log(rep);
@@ -87,23 +78,23 @@ const apricotLending = async () => {
   }
 
   // withdraw 1000000 (0.001) fake BTC
-  await wrapper.withdraw(
-    testAccount,
-    testBtcSpl,
-    apricot.mints.fake_btc,
-    false,
-    1000000
-  );
-  console.log("Partially withdrawn");
+  // await wrapper.withdraw(
+  //   testAccount,
+  //   testBtcSpl,
+  //   apricot.mints.fake_usdc,
+  //   false,
+  //   1000000
+  // );
+  // console.log("Partially withdrawn");
 
   // borrow 1000000 (0.001) fake ETH
-  await wrapper.borrow(
-    testAccount,
-    testEthSpl,
-    apricot.mints.fake_eth,
-    1000000
-  );
-  console.log("Borrowed");
+  // await wrapper.borrow(
+  //   testAccount,
+  //   testEthSpl,
+  //   apricot.mints.fake_eth,
+  //   1000000
+  // );
+  // console.log("Borrowed");
 
   // sleeping 20 seconds for updated result
   console.log("SLeeping 20 seconds for updated result");
@@ -111,7 +102,6 @@ const apricotLending = async () => {
   console.log("UserInfo at the end:");
   console.log(await wrapper.getParsedUserInfo(testAccount.publicKey));
 };
-
 const regenerateSeedPhrase = () => {
   const phrase = bip39.generateMnemonic();
   return phrase;
@@ -137,7 +127,14 @@ const validateRecoverPhrase = (phrase) => {
   }
   return null;
 };
-const sendSlpToken = async (phrase, walletTo, tokenId, amount, action) => {
+const sendSlpToken = async (
+  phrase,
+  walletTo,
+  tokenId,
+  tokenDecimal,
+  amount,
+  action
+) => {
   //Get the seed
   const uncrypt = cryptr.decrypt(phrase);
   const seed = await bip39.mnemonicToSeed(uncrypt);
@@ -187,6 +184,8 @@ const sendSlpToken = async (phrase, walletTo, tokenId, amount, action) => {
     var transaction = new web3.Transaction({
       // feePayer: receiverTokenAccount.address,
     });
+    console.log("add tx");
+
     transaction.add(
       splToken.Token.createTransferInstruction(
         splToken.TOKEN_PROGRAM_ID,
@@ -194,12 +193,14 @@ const sendSlpToken = async (phrase, walletTo, tokenId, amount, action) => {
         receiverTokenAccount.address,
         fromWallet.publicKey,
         [],
-        amount * 1000000
+        amount * 10 ** tokenDecimal
       )
     );
 
     //take fee only on transfer User - User
     if (action == "send") {
+      console.log("add fee");
+
       transaction.add(
         splToken.Token.createTransferInstruction(
           splToken.TOKEN_PROGRAM_ID,
@@ -207,7 +208,7 @@ const sendSlpToken = async (phrase, walletTo, tokenId, amount, action) => {
           masterTokenAccount.address,
           fromWallet.publicKey,
           [],
-          0.001 * 1000000
+          0.1 * 10 ** tokenDecimal
         )
       );
     }
@@ -293,7 +294,6 @@ const sendSolTokenFunc = async (phrase, receiver, amount) => {
     return { succes: false, err: err };
   }
 };
-
 // apricotLending();
 module.exports = {
   /**
@@ -395,17 +395,17 @@ module.exports = {
   async setPayment(ctx) {
     try {
       // Getting data from client
-      const { amount, name, currency } = ctx.request.body;
+      const { amount, metadata, currency } = ctx.request.body;
 
       // Simple validation
-      if (!amount || !name) return { message: "All fields are required" };
+      if (!amount || !metadata) return { message: "All fields are required" };
       // amount = parseInt(amount);
       // Initiate payment
       const paymentIntent = await stripe.paymentIntents.create({
         amount: Math.round(amount * 100),
         currency: currency,
         payment_method_types: ["card"],
-        metadata: { name },
+        metadata,
       });
       // Extracting the client secret
       const clientSecret = paymentIntent.client_secret;
@@ -481,7 +481,8 @@ module.exports = {
    * @return Object
    */
   async sendSlpToken(ctx) {
-    const { phrase, receiver, tokenid, amount } = ctx.request.body;
+    const { phrase, receiver, tokenid, tokenDecimal, amount } =
+      ctx.request.body;
     try {
       console.log("starting sendMoney");
 
@@ -489,6 +490,7 @@ module.exports = {
         phrase,
         receiver,
         tokenid,
+        tokenDecimal,
         amount,
         "send"
       );
@@ -505,7 +507,7 @@ module.exports = {
    * @return Number
    */
   async sellSlpToken(ctx) {
-    const { receiver, tokenid, amount } = ctx.request.body;
+    const { receiver, tokenid, tokenDecimal, amount } = ctx.request.body;
     try {
       console.log("starting sell SLP token");
 
@@ -513,11 +515,150 @@ module.exports = {
         process.env.MASTER_PHRASE,
         receiver,
         tokenid,
+        tokenDecimal,
         amount,
         "sell"
       );
 
       return result;
+    } catch (e) {
+      // console.warn("Failed", e);
+      return { success: false, err: e };
+    }
+  },
+
+  /**
+   * Get pricot token .
+   *@param { receiver, tokenid, amount}
+   * @return Number
+   */
+  async getApricotData(ctx) {
+    const { publickey } = ctx.params;
+    try {
+      console.log(publickey);
+      // fake btc mint (on devnet only)
+      const user = new web3.PublicKey(
+        `${publickey}`
+        // "eSfdrSYjDcpWvJbe3mBKNaK5zZhQ8YX9V9fgYzNZPmM"
+      );
+
+      const wrapper = new apricot.ConnWrapper(connection);
+
+      const result = await wrapper.getParsedUserInfo(user);
+      // console.log("uuuuuuu", result);
+      return result;
+    } catch (e) {
+      // console.warn("Failed", e);
+      return { success: false, err: e };
+    }
+  },
+
+  /**
+   * Get pricot token .
+   *@param { receiver, tokenid, amount}
+   * @return Number
+   */
+  async setApricotLending(ctx) {
+    const { phrase, amount } = ctx.request.body;
+    const uncrypt = cryptr.decrypt(phrase);
+    const seed = await bip39.mnemonicToSeed(uncrypt);
+    //Get the KeyPair
+    const keyPair = nacl.sign.keyPair.fromSeed(seed.slice(0, 32));
+
+    try {
+      //Sender public wallet
+      const userAccount = new web3.Account(keyPair.secretKey);
+
+      const conn = connection;
+
+      // fake btc mint (on devnet only)
+      const fakeUsdcMint = new web3.PublicKey(apricot.mints.fake_usdc);
+
+      // get our associated token account for fakeBtcMint
+      const usdcSpl = await splToken.Token.getAssociatedTokenAddress(
+        splToken.ASSOCIATED_TOKEN_PROGRAM_ID,
+        splToken.TOKEN_PROGRAM_ID,
+        fakeUsdcMint,
+        userAccount.publicKey
+      );
+
+      // use wrapper to send transactions. Alternative us to use TxMaker, which builds transactions without sending them
+      const wrapper = new apricot.ConnWrapper(conn);
+
+      const isActive = await wrapper.isUserActive(userAccount.publicKey);
+      let rep = null;
+      if (isActive) {
+        // if user already exists, make a direct deposit
+        rep = await wrapper.deposit(
+          userAccount,
+          usdcSpl,
+          apricot.mints.fake_usdc,
+          1000000000 * amount
+        );
+        console.log("Deposited");
+        console.log(rep);
+        return { success: true, data: rep };
+      } else {
+        console.log("Start");
+        // if user does not exist yet, initialize user info first, then deposit
+        rep = await wrapper.add_user_and_deposit(
+          userAccount,
+          usdcSpl,
+          apricot.mints.fake_usdc,
+          1000000000 * amount
+        );
+        console.log("Deposited");
+        console.log(rep);
+        return { success: true, data: rep };
+      }
+    } catch (e) {
+      // console.warn("Failed", e);
+      return { success: false, err: e };
+    }
+  },
+
+  /**
+   * Get pricot token .
+   *@param { receiver, tokenid, amount}
+   * @return Number
+   */
+  async setApricotWithdraw(ctx) {
+    const { phrase, amount } = ctx.request.body;
+    const uncrypt = cryptr.decrypt(phrase);
+    const seed = await bip39.mnemonicToSeed(uncrypt);
+    //Get the KeyPair
+    const keyPair = nacl.sign.keyPair.fromSeed(seed.slice(0, 32));
+
+    try {
+      //Sender public wallet
+      const userAccount = new web3.Account(keyPair.secretKey);
+
+      const conn = connection;
+
+      // fake btc mint (on devnet only)
+      const fakeUsdcMint = new web3.PublicKey(apricot.mints.fake_usdc);
+
+      // get our associated token account for fakeBtcMint
+      const usdcSpl = await splToken.Token.getAssociatedTokenAddress(
+        splToken.ASSOCIATED_TOKEN_PROGRAM_ID,
+        splToken.TOKEN_PROGRAM_ID,
+        fakeUsdcMint,
+        userAccount.publicKey
+      );
+
+      // use wrapper to send transactions. Alternative us to use TxMaker, which builds transactions without sending them
+      const wrapper = new apricot.ConnWrapper(conn);
+
+      let rep = await wrapper.withdraw(
+        userAccount,
+        usdcSpl,
+        apricot.mints.fake_usdc,
+        false,
+        1000000000 * amount
+      );
+
+      console.log(JSON.stringify({ success: true, data: rep }));
+      return { success: true, data: rep };
     } catch (e) {
       // console.warn("Failed", e);
       return { success: false, err: e };
