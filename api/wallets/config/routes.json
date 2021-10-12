@@ -51,14 +51,6 @@
     },
 
     {
-      "method": "POST",
-      "path": "/wallets/createtoken",
-      "handler": "wallets.createToken",
-      "config": {
-        "policies": []
-      }
-    },
-    {
       "method": "GET",
       "path": "/wallets/balancewallet/:address",
       "handler": "wallets.balanceWallet",
@@ -90,14 +82,7 @@
         "policies": []
       }
     },
-    {
-      "method": "POST",
-      "path": "/wallets/mintslptoken",
-      "handler": "wallets.mintSlpToken",
-      "config": {
-        "policies": []
-      }
-    },
+
     {
       "method": "POST",
       "path": "/wallets/stripepayment",
@@ -106,14 +91,7 @@
         "policies": []
       }
     },
-    {
-      "method": "GET",
-      "path": "/wallets/requestairdrop/:publicKey/:amount",
-      "handler": "wallets.requestAirDrop",
-      "config": {
-        "policies": []
-      }
-    },
+
     {
       "method": "GET",
       "path": "/wallets/refeedwallet/:publicKey/:amount",
