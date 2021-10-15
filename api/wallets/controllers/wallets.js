@@ -323,7 +323,7 @@ module.exports = {
   },
 
   /**
-   * Get Apricot Lending info .
+   * Get Apricot Lending info
    *@param { publickey}
    * @return Number
    */
