@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "10/14/2021 11:59:29 PM"
+    "x-generation-date": "10/26/2021 1:11:57 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -27,11 +27,11 @@
       "description": "Development server"
     },
     {
-      "url": "https://solana-wllet-dev.herokuapp.com",
+      "url": "YOUR_STAGING_SERVER",
       "description": "Staging server"
     },
     {
-      "url": "https://solana-wallet-prod.herokuapp.com",
+      "url": "YOUR_PRODUCTION_SERVER",
       "description": "Production server"
     }
   ],
@@ -95,7 +95,9 @@
           }
         },
         "summary": "",
-        "tags": ["Follows"],
+        "tags": [
+          "Follows"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -281,7 +283,9 @@
           }
         },
         "summary": "",
-        "tags": ["Follows"],
+        "tags": [
+          "Follows"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -346,7 +350,9 @@
           }
         },
         "summary": "",
-        "tags": ["Follows"],
+        "tags": [
+          "Follows"
+        ],
         "parameters": []
       }
     },
@@ -397,7 +403,9 @@
           }
         },
         "summary": "",
-        "tags": ["Follows"],
+        "tags": [
+          "Follows"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -457,7 +465,9 @@
           }
         },
         "summary": "",
-        "tags": ["Follows"],
+        "tags": [
+          "Follows"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -529,7 +539,9 @@
           }
         },
         "summary": "",
-        "tags": ["Follows"],
+        "tags": [
+          "Follows"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -594,7 +606,9 @@
           }
         },
         "summary": "",
-        "tags": ["Transactions"],
+        "tags": [
+          "Transactions"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -780,7 +794,9 @@
           }
         },
         "summary": "",
-        "tags": ["Transactions"],
+        "tags": [
+          "Transactions"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -845,7 +861,9 @@
           }
         },
         "summary": "",
-        "tags": ["Transactions"],
+        "tags": [
+          "Transactions"
+        ],
         "parameters": []
       }
     },
@@ -896,7 +914,9 @@
           }
         },
         "summary": "",
-        "tags": ["Transactions"],
+        "tags": [
+          "Transactions"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -956,7 +976,9 @@
           }
         },
         "summary": "",
-        "tags": ["Transactions"],
+        "tags": [
+          "Transactions"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1028,7 +1050,9 @@
           }
         },
         "summary": "",
-        "tags": ["Transactions"],
+        "tags": [
+          "Transactions"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1090,7 +1114,9 @@
           }
         },
         "summary": "",
-        "tags": ["Wallets"],
+        "tags": [
+          "Wallets"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1152,7 +1178,9 @@
           }
         },
         "summary": "",
-        "tags": ["Wallets"],
+        "tags": [
+          "Wallets"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -1344,7 +1372,9 @@
           }
         },
         "summary": "",
-        "tags": ["Wallets"],
+        "tags": [
+          "Wallets"
+        ],
         "parameters": []
       }
     },
@@ -1395,7 +1425,9 @@
           }
         },
         "summary": "",
-        "tags": ["Wallets"],
+        "tags": [
+          "Wallets"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1455,7 +1487,9 @@
           }
         },
         "summary": "",
-        "tags": ["Wallets"],
+        "tags": [
+          "Wallets"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1527,7 +1561,9 @@
           }
         },
         "summary": "",
-        "tags": ["Wallets"],
+        "tags": [
+          "Wallets"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -1593,7 +1629,9 @@
           }
         },
         "summary": "",
-        "tags": ["Wallets"],
+        "tags": [
+          "Wallets"
+        ],
         "parameters": [
           {
             "name": "address",
@@ -1659,7 +1697,9 @@
           }
         },
         "summary": "",
-        "tags": ["Wallets"],
+        "tags": [
+          "Wallets"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1728,7 +1768,9 @@
           }
         },
         "summary": "",
-        "tags": ["Wallets"],
+        "tags": [
+          "Wallets"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1797,7 +1839,9 @@
           }
         },
         "summary": "",
-        "tags": ["Wallets"],
+        "tags": [
+          "Wallets"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1866,7 +1910,9 @@
           }
         },
         "summary": "",
-        "tags": ["Wallets"],
+        "tags": [
+          "Wallets"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -1935,7 +1981,9 @@
           }
         },
         "summary": "",
-        "tags": ["Wallets"],
+        "tags": [
+          "Wallets"
+        ],
         "parameters": [
           {
             "name": "publicKey",
@@ -2011,7 +2059,9 @@
           }
         },
         "summary": "",
-        "tags": ["Wallets"],
+        "tags": [
+          "Wallets"
+        ],
         "parameters": [
           {
             "name": "publickey",
@@ -2077,7 +2127,9 @@
           }
         },
         "summary": "",
-        "tags": ["Wallets"],
+        "tags": [
+          "Wallets"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2146,7 +2198,9 @@
           }
         },
         "summary": "",
-        "tags": ["Wallets"],
+        "tags": [
+          "Wallets"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2215,7 +2269,9 @@
           }
         },
         "summary": "",
-        "tags": ["Email - Email"],
+        "tags": [
+          "Email - Email"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2284,7 +2340,9 @@
           }
         },
         "summary": "",
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2353,7 +2411,9 @@
           }
         },
         "summary": "",
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "parameters": []
       }
     },
@@ -2408,7 +2468,9 @@
           }
         },
         "summary": "",
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "parameters": []
       }
     },
@@ -2463,7 +2525,9 @@
           }
         },
         "summary": "",
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2527,7 +2591,9 @@
           }
         },
         "summary": "",
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2593,7 +2659,9 @@
           }
         },
         "summary": "",
-        "tags": ["Upload - File"],
+        "tags": [
+          "Upload - File"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2655,7 +2723,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - Role"],
+        "tags": [
+          "UsersPermissions - Role"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -2720,7 +2790,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - Role"],
+        "tags": [
+          "UsersPermissions - Role"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -2906,7 +2978,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - Role"],
+        "tags": [
+          "UsersPermissions - Role"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -2967,7 +3041,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - Role"],
+        "tags": [
+          "UsersPermissions - Role"
+        ],
         "parameters": [
           {
             "name": "role",
@@ -3042,7 +3118,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - Role"],
+        "tags": [
+          "UsersPermissions - Role"
+        ],
         "parameters": [
           {
             "name": "role",
@@ -3107,7 +3185,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -3309,7 +3389,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "parameters": []
       }
     },
@@ -3364,7 +3446,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3429,7 +3513,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3494,7 +3580,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "parameters": [
           {
             "name": "provider",
@@ -3560,7 +3648,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3629,7 +3719,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3698,7 +3790,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "parameters": []
       }
     },
@@ -3753,7 +3847,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "requestBody": {
           "description": "",
           "required": true,
@@ -3821,7 +3917,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "parameters": [
           {
             "name": "_limit",
@@ -4009,7 +4107,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "parameters": []
       }
     },
@@ -4060,7 +4160,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -4120,7 +4222,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -4195,7 +4299,9 @@
           }
         },
         "summary": "",
-        "tags": ["UsersPermissions - User"],
+        "tags": [
+          "UsersPermissions - User"
+        ],
         "parameters": [
           {
             "name": "id",
@@ -4214,13 +4320,20 @@
   "components": {
     "schemas": {
       "Follows": {
-        "required": ["id", "followUID"],
+        "required": [
+          "id",
+          "followUID"
+        ],
         "properties": {
           "id": {
             "type": "string"
           },
           "follower": {
-            "required": ["id", "username", "email"],
+            "required": [
+              "id",
+              "username",
+              "email"
+            ],
             "properties": {
               "id": {
                 "type": "string"
@@ -4285,7 +4398,11 @@
             }
           },
           "user": {
-            "required": ["id", "username", "email"],
+            "required": [
+              "id",
+              "username",
+              "email"
+            ],
             "properties": {
               "id": {
                 "type": "string"
@@ -4351,7 +4468,11 @@
           },
           "status": {
             "type": "string",
-            "enum": ["PENDING", "ACCEPTED", "REJECTED"]
+            "enum": [
+              "PENDING",
+              "ACCEPTED",
+              "REJECTED"
+            ]
           },
           "followUID": {
             "type": "string"
@@ -4363,7 +4484,9 @@
         }
       },
       "NewFollows": {
-        "required": ["followUID"],
+        "required": [
+          "followUID"
+        ],
         "properties": {
           "follower": {
             "type": "string"
@@ -4373,7 +4496,11 @@
           },
           "status": {
             "type": "string",
-            "enum": ["PENDING", "ACCEPTED", "REJECTED"]
+            "enum": [
+              "PENDING",
+              "ACCEPTED",
+              "REJECTED"
+            ]
           },
           "followUID": {
             "type": "string"
@@ -4391,13 +4518,19 @@
         }
       },
       "Transactions": {
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "properties": {
           "id": {
             "type": "string"
           },
           "sender": {
-            "required": ["id", "username", "email"],
+            "required": [
+              "id",
+              "username",
+              "email"
+            ],
             "properties": {
               "id": {
                 "type": "string"
@@ -4462,7 +4595,11 @@
             }
           },
           "receiver": {
-            "required": ["id", "username", "email"],
+            "required": [
+              "id",
+              "username",
+              "email"
+            ],
             "properties": {
               "id": {
                 "type": "string"
@@ -4541,7 +4678,17 @@
           "type": {
             "type": "string",
             "default": "SEND",
-            "enum": ["SEND", "LEND", "BORROW"]
+            "enum": [
+              "SEND",
+              "LEND",
+              "BORROW"
+            ]
+          },
+          "rates": {
+            "type": "number"
+          },
+          "rateCurrency": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
@@ -4572,7 +4719,17 @@
           "type": {
             "type": "string",
             "default": "SEND",
-            "enum": ["SEND", "LEND", "BORROW"]
+            "enum": [
+              "SEND",
+              "LEND",
+              "BORROW"
+            ]
+          },
+          "rates": {
+            "type": "number"
+          },
+          "rateCurrency": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",
@@ -4587,7 +4744,9 @@
         }
       },
       "Wallets": {
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -4631,7 +4790,10 @@
         }
       },
       "UsersPermissionsRole": {
-        "required": ["id", "name"],
+        "required": [
+          "id",
+          "name"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -4649,7 +4811,13 @@
           "permissions": {
             "type": "array",
             "items": {
-              "required": ["id", "type", "controller", "action", "enabled"],
+              "required": [
+                "id",
+                "type",
+                "controller",
+                "action",
+                "enabled"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
@@ -4684,7 +4852,11 @@
           "users": {
             "type": "array",
             "items": {
-              "required": ["id", "username", "email"],
+              "required": [
+                "id",
+                "username",
+                "email"
+              ],
               "properties": {
                 "id": {
                   "type": "string"
@@ -4752,7 +4924,9 @@
         }
       },
       "NewUsersPermissionsRole": {
-        "required": ["name"],
+        "required": [
+          "name"
+        ],
         "properties": {
           "name": {
             "type": "string",
@@ -4785,7 +4959,11 @@
         }
       },
       "UsersPermissionsUser": {
-        "required": ["id", "username", "email"],
+        "required": [
+          "id",
+          "username",
+          "email"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -4810,7 +4988,10 @@
             "default": false
           },
           "role": {
-            "required": ["id", "name"],
+            "required": [
+              "id",
+              "name"
+            ],
             "properties": {
               "id": {
                 "type": "string"
@@ -4845,7 +5026,9 @@
             }
           },
           "walletid": {
-            "required": ["id"],
+            "required": [
+              "id"
+            ],
             "properties": {
               "id": {
                 "type": "string"
@@ -4894,7 +5077,10 @@
         }
       },
       "NewUsersPermissionsUser": {
-        "required": ["username", "email"],
+        "required": [
+          "username",
+          "email"
+        ],
         "properties": {
           "username": {
             "type": "string",
@@ -4962,7 +5148,10 @@
         }
       },
       "Error": {
-        "required": ["code", "message"],
+        "required": [
+          "code",
+          "message"
+        ],
         "properties": {
           "code": {
             "type": "integer",

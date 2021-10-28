@@ -681,6 +681,12 @@
               "BORROW"
             ]
           },
+          "rates": {
+            "type": "number"
+          },
+          "rateCurrency": {
+            "type": "string"
+          },
           "published_at": {
             "type": "string",
             "format": "date-time"
@@ -715,6 +721,12 @@
               "LEND",
               "BORROW"
             ]
+          },
+          "rates": {
+            "type": "number"
+          },
+          "rateCurrency": {
+            "type": "string"
           },
           "published_at": {
             "type": "string",

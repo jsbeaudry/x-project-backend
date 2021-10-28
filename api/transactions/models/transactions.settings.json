@@ -39,6 +39,12 @@
         "BORROW"
       ],
       "default": "SEND"
+    },
+    "rates": {
+      "type": "float"
+    },
+    "rateCurrency": {
+      "type": "string"
     }
   }
 }
