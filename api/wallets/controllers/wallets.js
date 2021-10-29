@@ -11,29 +11,6 @@ const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 const Cryptr = require("cryptr");
 const cryptr = new Cryptr(process.env.SECRETKEY);
 const apricot = require("@apricot-lend/apricot");
-// const Moncash = require("moncash");
-
-// const moncash = new Moncash({
-//   mode: "sandbox", // 'sandbox' | 'live'
-//   clientId: "5ad03fba8fbd6ef1062920377bc495b8",
-//   clientSecret:
-//     "-FUYsAOe9xwfwfPZz6WIgynNRAFH530HaMJRt_Dws_YO4aa6HbYZUBDb1OJ5RK-I",
-// });
-
-// moncash.transfert.create(
-//   {
-//     receiver: "50937649948",
-//     amount: "100", // Ex: 50
-//     desc: "Just to test",
-//   },
-//   (err, transfert) => {
-//     if (err) {
-//       console.log(err);
-//       return false;
-//     }
-//     console.log(transfert);
-//   }
-// );
 
 const connection = new web3.Connection(
   web3.clusterApiUrl("devnet"),
@@ -65,6 +42,7 @@ const sendSlpToken = async (
   action
 ) => {
   //Get the seed
+  console.log("Decrypting");
   const uncrypt = cryptr.decrypt(phrase);
   const seed = await bip39.mnemonicToSeed(uncrypt);
   //Get the KeyPair
@@ -81,7 +59,7 @@ const sendSlpToken = async (
 
   //Receiver public KEY
   const master = new web3.PublicKey(`${process.env.MASTER_PUBLICKEY}`);
-
+  console.log("Loading token");
   try {
     // Load new token mint
     const token = new splToken.Token(
@@ -340,7 +318,7 @@ module.exports = {
 
       return result;
     } catch (e) {
-      // console.warn("Failed", e);
+      console.warn("Failed", e);
       return { success: false, err: e };
     }
   },
